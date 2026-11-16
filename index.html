@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>إرشاد أولي البصائر والألباب — الدروس الصوتية</title>
+<meta name="description" content="التعليق على كتاب إرشاد أولي البصائر والألباب للسعدي — الشيخ أحمد بن ناصر القعيمي">
+<meta name="theme-color" content="#0f3d33">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f4f1ea;--card:#fff;--ink:#1c2422;--mut:#6b7672;--line:#e3ded2;--acc:#0f6b57;--acc2:#0f3d33;--soft:#e6f1ed}
+@media(prefers-color-scheme:dark){:root{--bg:#0e1513;--card:#17201d;--ink:#eef2f0;--mut:#93a09b;--line:#26322e;--acc:#3fbf9f;--acc2:#0f3d33;--soft:#1d2e29}}
+*{box-sizing:border-box;margin:0}
+body{font-family:"IBM Plex Sans Arabic",-apple-system,"Segoe UI",Tahoma,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6;-webkit-tap-highlight-color:transparent}
+.wrap{max-width:640px;margin:0 auto;padding:18px 14px 60px}
+header h1{font-size:1.2rem;font-weight:700;line-height:1.5}
+header p{color:var(--mut);font-size:.9rem;margin-top:2px}
+.player{background:var(--card);border:1px solid var(--line);border-radius:20px;margin-top:14px;overflow:hidden}
+#stage{position:relative;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;height:170px;background:linear-gradient(160deg,#14594a,var(--acc2));color:#fff;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none;touch-action:manipulation;cursor:pointer}
+#now{position:absolute;top:12px;left:0;right:0;text-align:center;font-weight:600;font-size:1.05rem;pointer-events:none}
+#status{position:absolute;bottom:10px;left:0;right:0;text-align:center;font-size:.78rem;opacity:.75;pointer-events:none}
+.zone{height:100%;display:flex;align-items:center;justify-content:center;gap:4px;opacity:.55;font-weight:600;font-size:.9rem;pointer-events:none;transition:opacity .15s,background .15s}
+.zone svg{width:26px;height:26px;fill:currentColor}
+.zone.hit{opacity:1;background:rgba(255,255,255,.14)}
+#pp{width:76px;height:76px;border-radius:50%;border:0;background:#fff;color:var(--acc2);display:grid;place-items:center;pointer-events:none}
+#pp svg{width:38px;height:38px;fill:currentColor}
+#badge{position:absolute;top:44px;left:50%;transform:translateX(-50%);background:rgba(0,0,0,.6);padding:3px 14px;border-radius:99px;font-weight:700;font-size:.9rem;display:none;pointer-events:none}
+#stage.hold #badge{display:block}
+.body{padding:14px 16px 16px}
+#seek{width:100%;height:28px;appearance:none;-webkit-appearance:none;background:transparent;display:block}
+#seek::-webkit-slider-runnable-track{height:6px;border-radius:9px;background:linear-gradient(to right,var(--acc) var(--p,0%),var(--line) var(--p,0%))}
+#seek::-moz-range-track{height:6px;border-radius:9px;background:var(--line)}
+#seek::-moz-range-progress{height:6px;border-radius:9px;background:var(--acc)}
+#seek::-webkit-slider-thumb{-webkit-appearance:none;width:18px;height:18px;border-radius:50%;background:var(--acc);margin-top:-6px;border:0}
+#seek::-moz-range-thumb{width:18px;height:18px;border-radius:50%;background:var(--acc);border:0}
+.times{display:flex;justify-content:space-between;font-size:.82rem;color:var(--mut);font-variant-numeric:tabular-nums;direction:ltr}
+.row{display:flex;gap:8px;margin-top:12px;direction:ltr}
+.row button{flex:1}
+button{font:inherit;color:var(--ink);cursor:pointer}
+.btn{background:var(--soft);border:0;border-radius:12px;padding:10px 6px;font-weight:600;font-size:.88rem}
+.btn:active{transform:scale(.97)}
+.btn:disabled{opacity:.35}
+.speed{margin-top:16px;border-top:1px solid var(--line);padding-top:12px}
+.speed .top{display:flex;align-items:center;justify-content:space-between}
+.speed .lbl{font-weight:600;font-size:.92rem}
+.step{display:flex;align-items:center;gap:6px;direction:ltr}
+.step button{width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:var(--card);font-size:1.2rem;font-weight:700;line-height:1}
+#sv{min-width:64px;text-align:center;font-weight:700;font-size:1.05rem;color:var(--acc);font-variant-numeric:tabular-nums}
+.chips{display:flex;gap:6px;margin-top:10px;direction:ltr;overflow-x:auto;padding-bottom:2px}
+.chip{flex:1 0 auto;min-width:48px;border:1px solid var(--line);background:var(--card);border-radius:99px;padding:6px 8px;font-size:.85rem;font-weight:600}
+.chip.on{background:var(--acc);border-color:var(--acc);color:#fff}
+#left{font-size:.8rem;color:var(--mut);margin-top:8px}
+.hint{font-size:.8rem;color:var(--mut);margin:12px 4px 0;text-align:center}
+h2{font-size:1rem;margin:22px 4px 8px}
+.list{background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden}
+.item{display:flex;align-items:center;gap:12px;width:100%;text-align:right;background:none;border:0;border-bottom:1px solid var(--line);padding:11px 14px}
+.item:last-child{border-bottom:0}
+.item .n{width:36px;height:36px;border-radius:50%;background:var(--soft);display:grid;place-items:center;font-weight:700;font-size:.9rem;flex:none}
+.item .tx{flex:1;min-width:0}
+.item .tt{font-weight:600;font-size:.95rem}
+.item .mt{font-size:.78rem;color:var(--mut)}
+.item .bar{height:3px;background:var(--line);border-radius:9px;margin-top:5px;overflow:hidden;direction:ltr}
+.item .bar i{display:block;height:100%;background:var(--acc)}
+.item.cur{background:var(--soft)}
+.item.cur .n{background:var(--acc);color:#fff}
+.item.done .n{background:var(--acc);color:#fff}
+.item.miss{opacity:.5;cursor:default}
+footer{margin-top:18px;font-size:.8rem;color:var(--mut);text-align:center}
+footer a{color:var(--acc)}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+<h1>إرشاد أولي البصائر والألباب لنيل الفقه بأقرب الطرق وأيسر الأسباب</h1>
+<p>للعلامة السعدي رحمه الله — تعليق الشيخ أحمد بن ناصر القعيمي</p>
+</header>
+
+<section class="player">
+<div id="stage" dir="ltr" role="button" tabindex="0" aria-label="تشغيل أو إيقاف">
+<div id="now"></div>
+<div class="zone" id="zb"><svg viewBox="0 0 24 24"><path d="M20 5v14l-8-7zM12 5v14l-8-7z"/></svg><span>10</span></div>
+<div id="pp"><svg viewBox="0 0 24 24"><path id="ppi" d="M8 5v14l11-7z"/></svg></div>
+<div class="zone" id="zf"><span>10</span><svg viewBox="0 0 24 24"><path d="M4 5v14l8-7zM12 5v14l8-7z"/></svg></div>
+<div id="badge"></div>
+<div id="status"></div>
+</div>
+<div class="body">
+<input id="seek" type="range" min="0" max="100" step="1" value="0" dir="ltr" aria-label="موضع التشغيل">
+<div class="times"><span id="tc">0:00</span><span id="td">0:00</span></div>
+<div class="row">
+<button class="btn" id="prev">⏮ السابق</button>
+<button class="btn" id="b30">30− ث</button>
+<button class="btn" id="f30">30+ ث</button>
+<button class="btn" id="next">التالي ⏭</button>
+</div>
+<div class="speed">
+<div class="top"><span class="lbl">السرعة</span>
+<div class="step"><button id="sm" aria-label="أبطأ">−</button><span id="sv">1×</span><button id="sp" aria-label="أسرع">+</button></div></div>
+<div class="chips" id="chips"></div>
+<div id="left"></div>
+</div>
+</div>
+</section>
+<p class="hint">ضغطتين على اليمين أو اليسار = تقديم/ترجيع 10 ثوانٍ · اضغط مطوّلاً = تسريع مؤقت · ضغطة في الوسط = تشغيل/إيقاف</p>
+
+<h2>الدروس</h2>
+<div class="list" id="list"></div>
+
+<footer>يحفظ الموقع مكان توقفك وسرعتك تلقائياً على هذا الجهاز<br>
+<a href="https://archive.org/download/Irshad_Ouli_Basair/Irshad_Ouli_Basair.pdf" target="_blank" rel="noopener">كتاب المتن PDF</a> · <a href="https://archive.org/details/Irshad_Ouli_Basair" target="_blank" rel="noopener">المصدر: archive.org</a></footer>
+</div>
+<audio id="audio" preload="metadata"></audio>
+
+<script>
+const BASE='https://archive.org/download/Irshad_Ouli_Basair/';
+const L=[[1,2301],[2,3674],[3,3263],[4,3378],[5,3631],[6,3814],[7,3616],[8,4309],[10,3445],[11,3108],[12,3032],[13,3056],[14,3063],[15,3690],[16,3949]]
+ .map(([n,d])=>({n,d,id:String(n).padStart(2,'0'),t:n===16?'المجلس 16 والأخير':'الدرس '+n}));
+const KEY='irshad-player-v1';
+let S={cur:0,speed:1,pos:{},done:{}};
+try{Object.assign(S,JSON.parse(localStorage.getItem(KEY)||'{}'))}catch(e){}
+if(!(S.cur>=0&&S.cur<L.length))S.cur=0;
+const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}};
+const $=id=>document.getElementById(id);
+const a=$('audio'),stage=$('stage'),seek=$('seek');
+let holding=false,seeking=false,pending=0,lastSave=0;
+const fmt=s=>{s=Math.max(0,Math.floor(s||0));const h=Math.floor(s/3600),m=Math.floor(s%3600/60),x=s%60;return(h?h+':'+String(m).padStart(2,'0'):m)+':'+String(x).padStart(2,'0')};
+const dur=()=>isFinite(a.duration)&&a.duration>0?a.duration:L[S.cur].d;
+const holdRate=()=>S.speed<2?2:Math.min(S.speed+1,4);
+const rate=()=>{a.playbackRate=holding?holdRate():S.speed};
+
+function load(i,play){
+  S.cur=i;const l=L[i];
+  pending=S.pos[l.id]||0;if(pending>l.d-20)pending=0;
+  a.src=BASE+l.id+'.mp3';
+  $('now').textContent=l.t;
+  document.title=l.t+' — إرشاد أولي البصائر';
+  seek.max=l.d;paint(pending);
+  $('prev').disabled=i===0;$('next').disabled=i===L.length-1;
+  if('mediaSession'in navigator&&window.MediaMetadata)navigator.mediaSession.metadata=new MediaMetadata({title:l.t,artist:'الشيخ أحمد بن ناصر القعيمي',album:'إرشاد أولي البصائر والألباب'});
+  renderList();save();
+  if(play)a.play().catch(()=>{});
+}
+function paint(t){
+  const d=dur();seek.max=d;seek.value=t;
+  seek.style.setProperty('--p',(d?t/d*100:0)+'%');
+  $('tc').textContent=fmt(t);$('td').textContent=fmt(d);
+  const rem=Math.max(0,d-t)/S.speed;
+  $('left').textContent='المتبقي من الدرس بسرعتك: '+(rem>=60?Math.round(rem/60)+' دقيقة':'أقل من دقيقة');
+}
+function jump(s){const t=Math.min(Math.max(0,(a.currentTime||pending)+s),dur()-1);a.currentTime=t;pending=t;paint(t)}
+function toggle(){a.paused?a.play().catch(()=>{}):a.pause()}
+function setSpeed(v){S.speed=Math.min(4,Math.max(.5,Math.round(v*20)/20));rate();paintSpeed();paint(a.currentTime||pending);save()}
+function paintSpeed(){
+  $('sv').textContent=S.speed+'×';
+  document.querySelectorAll('.chip').forEach(c=>c.classList.toggle('on',+c.dataset.v===S.speed));
+}
+function renderList(){
+  const box=$('list');box.innerHTML='';
+  L.forEach((l,i)=>{
+    if(l.n===10){const m=document.createElement('div');m.className='item miss';m.innerHTML='<span class="n">9</span><span class="tx"><div class="tt">الدرس 9</div><div class="mt">غير موجود في المصدر</div></span>';box.appendChild(m)}
+    const p=S.pos[l.id]||0,done=!!S.done[l.id],b=document.createElement('button');
+    b.className='item'+(i===S.cur?' cur':'')+(done?' done':'');
+    const pct=done?100:Math.min(100,p/l.d*100);
+    b.innerHTML='<span class="n">'+(done?'✓':l.n)+'</span><span class="tx"><div class="tt">'+l.t+'</div><div class="mt">'+Math.round(l.d/60)+' دقيقة'+(done?' · مكتمل':p>30?' · وصلت '+fmt(p):'')+'</div>'+(pct>1?'<div class="bar"><i style="width:'+pct+'%"></i></div>':'')+'</span>';
+    b.onclick=()=>{if(i!==S.cur)load(i,true);else toggle();window.scrollTo({top:0,behavior:'smooth'})};
+    box.appendChild(b);
+  });
+}
+
+a.addEventListener('loadedmetadata',()=>{if(pending>0)a.currentTime=pending;rate();paint(a.currentTime)});
+a.addEventListener('play',()=>{rate();$('ppi').setAttribute('d','M6 5h4v14H6zM14 5h4v14h-4z')});
+a.addEventListener('pause',()=>{$('ppi').setAttribute('d','M8 5v14l11-7z');keep(true)});
+a.addEventListener('waiting',()=>{$('status').textContent='جارٍ التحميل…'});
+a.addEventListener('playing',()=>{$('status').textContent=''});
+a.addEventListener('canplay',()=>{$('status').textContent=''});
+a.addEventListener('error',()=>{$('status').textContent='تعذّر تحميل الصوت — تحقق من الاتصال ثم أعد المحاولة'});
+a.addEventListener('timeupdate',()=>{if(!seeking)paint(a.currentTime);keep(false)});
+a.addEventListener('ended',()=>{const l=L[S.cur];S.done[l.id]=true;S.pos[l.id]=0;save();if(S.cur<L.length-1)load(S.cur+1,true);else renderList()});
+function keep(force){
+  const now=Date.now();if(!force&&now-lastSave<5000)return;lastSave=now;
+  const l=L[S.cur],t=a.currentTime;if(!t)return;
+  S.pos[l.id]=t;pending=t;if(t>dur()-45)S.done[l.id]=true;
+  save();if(force)renderList();
+}
+document.addEventListener('visibilitychange',()=>{if(document.hidden)keep(true)});
+window.addEventListener('pagehide',()=>keep(true));
+
+seek.addEventListener('input',()=>{seeking=true;paint(+seek.value)});
+seek.addEventListener('change',()=>{a.currentTime=+seek.value;pending=+seek.value;seeking=false});
+
+/* stage gestures: center tap, side double-tap, press and hold */
+let holdT=0,lastTap=0,lastSide=0,acc=0,accT=0,downAt=0;
+function endHold(){clearTimeout(holdT);if(holding){holding=false;stage.classList.remove('hold');rate();return true}return false}
+stage.addEventListener('pointerdown',e=>{
+  if(e.button)return;downAt=Date.now();
+  try{stage.setPointerCapture(e.pointerId)}catch(_){}
+  holdT=setTimeout(()=>{holding=true;$('badge').textContent=holdRate()+'× ⏩';stage.classList.add('hold');rate();if(a.paused)a.play().catch(()=>{})},450);
+});
+stage.addEventListener('pointerup',e=>{
+  if(endHold()||!downAt)return;downAt=0;
+  const r=stage.getBoundingClientRect(),x=(e.clientX-r.left)/r.width;
+  if(x>.36&&x<.64){toggle();return}
+  const side=x>.5?1:-1,now=Date.now();
+  if(now-lastTap<350&&side===lastSide){
+    jump(side*10);acc=(accT&&acc*side>0?acc:0)+side*10;
+    const z=$(side>0?'zf':'zb');z.classList.add('hit');z.querySelector('span').textContent=Math.abs(acc);
+    clearTimeout(accT);accT=setTimeout(()=>{z.classList.remove('hit');z.querySelector('span').textContent='10';acc=0;accT=0},700);
+  }
+  lastTap=now;lastSide=side;
+});
+stage.addEventListener('pointercancel',()=>{endHold();downAt=0});
+stage.addEventListener('contextmenu',e=>e.preventDefault());
+
+$('prev').onclick=()=>{if(S.cur>0){keep(true);load(S.cur-1,true)}};
+$('next').onclick=()=>{if(S.cur<L.length-1){keep(true);load(S.cur+1,true)}};
+$('b30').onclick=()=>jump(-30);$('f30').onclick=()=>jump(30);
+$('sm').onclick=()=>setSpeed(S.speed-.05);$('sp').onclick=()=>setSpeed(S.speed+.05);
+[.75,1,1.25,1.5,1.75,2,2.5,3].forEach(v=>{const c=document.createElement('button');c.className='chip';c.dataset.v=v;c.textContent=v+'×';c.onclick=()=>setSpeed(v);$('chips').appendChild(c)});
+
+document.addEventListener('keydown',e=>{
+  if(e.target.tagName==='INPUT'||e.metaKey||e.ctrlKey)return;
+  if(e.code==='Space'){e.preventDefault();toggle()}
+  else if(e.key==='ArrowRight')jump(10);
+  else if(e.key==='ArrowLeft')jump(-10);
+  else if(e.key==='>'||e.key==='.')setSpeed(S.speed+.25);
+  else if(e.key==='<'||e.key===',')setSpeed(S.speed-.25);
+});
+if('mediaSession'in navigator){
+  const ms=navigator.mediaSession,h=(k,f)=>{try{ms.setActionHandler(k,f)}catch(_){}};
+  h('play',()=>a.play());h('pause',()=>a.pause());
+  h('seekbackward',()=>jump(-10));h('seekforward',()=>jump(10));
+  h('previoustrack',()=>$('prev').click());h('nexttrack',()=>$('next').click());
+}
+paintSpeed();load(S.cur,false);
+</script>
+</body>
+</html>
