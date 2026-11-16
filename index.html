@@ -52,6 +52,7 @@ button{font:inherit;color:var(--ink);cursor:pointer}
 .chip{flex:1 0 auto;min-width:48px;border:1px solid var(--line);background:var(--card);border-radius:99px;padding:6px 8px;font-size:.85rem;font-weight:600}
 .chip.on{background:var(--acc);border-color:var(--acc);color:#fff}
 #left{font-size:.8rem;color:var(--mut);margin-top:8px}
+.fmsg{font-size:.8rem;color:var(--mut);margin-top:6px;min-height:1.2em;text-align:center}
 .hint{font-size:.8rem;color:var(--mut);margin:12px 4px 0;text-align:center}
 h2{font-size:1rem;margin:22px 4px 8px}
 .list{background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden}
@@ -96,6 +97,11 @@ footer a{color:var(--acc)}
 <button class="btn" id="f30">30+ ث</button>
 <button class="btn" id="next">التالي ⏭</button>
 </div>
+<div class="row" style="direction:rtl">
+<button class="btn" id="dl">⬇ تحميل الدرس</button>
+<button class="btn" id="sh">↗ مشاركة الدرس</button>
+</div>
+<div id="fmsg" class="fmsg"></div>
 <div class="speed">
 <div class="top"><span class="lbl">السرعة</span>
 <div class="step"><button id="sm" aria-label="أبطأ">−</button><span id="sv">1×</span><button id="sp" aria-label="أسرع">+</button></div></div>
@@ -140,7 +146,7 @@ function load(i,play){
   seek.max=l.d;paint(pending);
   $('prev').disabled=i===0;$('next').disabled=i===L.length-1;
   if('mediaSession'in navigator&&window.MediaMetadata)navigator.mediaSession.metadata=new MediaMetadata({title:l.t,artist:'الشيخ أحمد بن ناصر القعيمي',album:'إرشاد أولي البصائر والألباب'});
-  renderList();save();
+  fileUI();renderList();save();
   if(play)a.play().catch(()=>{});
 }
 function paint(t){
@@ -219,6 +225,39 @@ $('next').onclick=()=>{if(S.cur<L.length-1){keep(true);load(S.cur+1,true)}};
 $('b30').onclick=()=>jump(-30);$('f30').onclick=()=>jump(30);
 $('sm').onclick=()=>setSpeed(S.speed-.05);$('sp').onclick=()=>setSpeed(S.speed+.05);
 [.75,1,1.25,1.5,1.75,2,2.5,3].forEach(v=>{const c=document.createElement('button');c.className='chip';c.dataset.v=v;c.textContent=v+'×';c.onclick=()=>setSpeed(v);$('chips').appendChild(c)});
+
+/* download + share of the current lesson */
+const blobs={};let busy=false;
+const fname=l=>'إرشاد أولي البصائر - '+l.t+'.mp3';
+const msg=t=>{$('fmsg').textContent=t};
+function fileUI(){const l=L[S.cur];$('sh').textContent=blobs[l.id]?'↗ مشاركة الملف':'↗ مشاركة الدرس';$('dl').textContent='⬇ تحميل الدرس';msg('')}
+async function getBlob(l){
+  if(blobs[l.id])return blobs[l.id];
+  const r=await fetch(BASE+l.id+'.mp3');if(!r.ok)throw new Error(r.status);
+  const total=+r.headers.get('content-length')||0,rd=r.body.getReader(),parts=[];let got=0;
+  for(;;){const {done,value}=await rd.read();if(done)break;parts.push(value);got+=value.length;
+    msg('جارٍ التحميل… '+(total?Math.round(got/total*100)+'%':Math.round(got/1048576)+' م.ب'))}
+  return blobs[l.id]=new Blob(parts,{type:'audio/mpeg'});
+}
+$('dl').onclick=async()=>{
+  if(busy)return;busy=true;const l=L[S.cur];
+  try{
+    const b=await getBlob(l),u=URL.createObjectURL(b),x=document.createElement('a');
+    x.href=u;x.download=fname(l);document.body.appendChild(x);x.click();x.remove();
+    setTimeout(()=>URL.revokeObjectURL(u),60000);
+    if(L[S.cur]===l){fileUI();msg('تم تحميل '+l.t+' ✓')}
+  }catch(e){msg('تعذّر التحميل المباشر — يفتح لك الملف من المصدر');window.open(BASE+l.id+'.mp3','_blank')}
+  busy=false;
+};
+$('sh').onclick=async()=>{
+  const l=L[S.cur],url=BASE+l.id+'.mp3',title='إرشاد أولي البصائر والألباب — '+l.t;
+  try{
+    const b=blobs[l.id];
+    if(b&&navigator.canShare){const f=new File([b],fname(l),{type:'audio/mpeg'});if(navigator.canShare({files:[f]})){await navigator.share({files:[f],title});return}}
+    if(navigator.share){await navigator.share({title,text:title,url});return}
+    await navigator.clipboard.writeText(title+'\n'+url);msg('تم نسخ رابط الدرس ✓');
+  }catch(e){if(e&&e.name!=='AbortError')msg('رابط الدرس: '+url)}
+};
 
 document.addEventListener('keydown',e=>{
   if(e.target.tagName==='INPUT'||e.metaKey||e.ctrlKey)return;
